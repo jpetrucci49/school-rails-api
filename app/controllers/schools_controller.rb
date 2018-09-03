@@ -3,7 +3,7 @@ class SchoolsController < OpenReadController
 
   # GET /schools
   def index
-    @schools = School.all
+    @schools = current_user.schools.all
 
     render json: @schools
   end
