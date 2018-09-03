@@ -1,4 +1,4 @@
-class SchoolsController < ProtectedController
+class SchoolsController < OpenReadController
   before_action :set_school, only: [:show, :update, :destroy]
 
   # GET /schools
