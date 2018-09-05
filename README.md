@@ -12,9 +12,9 @@ https://github.com/jpetrucci49/school-browser
 
 ## ERD:
 
-![alt text](./public/0830180906a.jpg)
+![ERD v1 & 2](./public/0830180906a.jpg)
 
-![alt text](./public/0830180912a.jpg)
+![ERD v3](./public/0830180912a.jpg)
 
 ### Authentication
 
