@@ -1,7 +1,14 @@
 
 # School Rails Api
 
-School API back end database for School browser
+School API back end database for School browser. \
+
+Technology used in this project include Ruby, Rails, postgreSQL, Heroku and Rake
+
+This API recieves requests from cross-origin clients and responds with JSON snippets of User created school listings.
+
+# School-browser:
+https://github.com/jpetrucci49/school-browser
 
 ### Authentication
 
@@ -233,22 +240,162 @@ Content-Type: application/json; charset=utf-8
 {"user":{"id":1,"email":"mike@m"}}
 ```
 
-### Reset Database without dropping
+#### CREATE /schools
 
-This is not a task developers should run often, but it is sometimes necessary.
-
-**locally**
+Request:
 
 ```sh
-bin/rails db:migrate VERSION=0
-bin/rails db:migrate db:seed db:examples
+curl "https://school-rails-api.herokuapp.com/schools" \
+  --include \
+  --request POST \
+  --header "Authorization: Token token=${TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "school": {
+      "name": "'"${NAME}"'",
+      "address": "'"${ADD}"'",
+      "city": "'"${CITY}"'",
+      "phone": "'"${PHONE}"'",
+      "zip": "'"${ZIP}"'"
+    }
+  }'
 ```
 
-**heroku**
+```sh
+TOKEN="BAhJIiU1NGNlYjRmMjBhM2NkZTZiNzk1MGNiYmZiYWMyY2U4MwY6BkVG--ddb1e16af0e05921aa56d771e4a2f816f2a1d46e"
+NAME="English High School"
+ADD="300 West St."
+CITY=Boston
+PHONE=5559054354
+ZIP=02020
+sh scripts/schools/create.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 201 Created
+Location: https://school-rails-api.herokuapp.com/schools/1
+Content-Type: application/json; charset=utf-8
+
+{"school":{"id":1,"name":"English High School","address":"300 West St.","city":"Boston","phone":5559054354,"zip":02020,"user":{"id":1,"email":"User@user"},"editable":true}}
+```
+
+#### UPDATE /schools/:id
+
+Request:
 
 ```sh
-heroku run rails db:migrate VERSION=0
-heroku run rails db:migrate db:seed db:examples
+curl "https://school-rails-api.herokuapp.com/schools/${ID}" \
+  --include \
+  --request PATCH \
+  --header "Authorization: Token token=${TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "school": {
+      "name": "'"${NAME}"'",
+      "address": "'"${ADD}"'",
+      "city": "'"${CITY}"'",
+      "phone": "'"${PHONE}"'",
+      "zip": "'"${ZIP}"'"
+    }
+  }'
+```
+
+```sh
+ID=1
+TOKEN="BAhJIiU1NGNlYjRmMjBhM2NkZTZiNzk1MGNiYmZiYWMyY2U4MwY6BkVG--ddb1e16af0e05921aa56d771e4a2f816f2a1d46e"
+NAME="Cambridge College"
+ADD="300 West St."
+CITY=Boston
+PHONE=2203043030
+ZIP=02020
+sh scripts/schools/update.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{"school":{"id":1,"name":"Cambridge College","address":"300 West St.","city":"Boston","phone":2203043030,"zip":02020,"user":{"id":1,"email":"User@user"},"editable":true}}
+```
+
+#### INDEX /schools
+
+Request:
+
+```sh
+curl "https://school-rails-api.herokuapp.com/schools" \
+  --include \
+  --request GET \
+  --header "Authorization: Token token=${TOKEN}" \
+  --header "Content-Type: application/json" \
+```
+
+```sh
+TOKEN="BAhJIiU1NGNlYjRmMjBhM2NkZTZiNzk1MGNiYmZiYWMyY2U4MwY6BkVG--ddb1e16af0e05921aa56d771e4a2f816f2a1d46e"
+sh scripts/schools/index.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{"school":{"id":1,"name":"Cambridge College","address":"300 West St.","city":"Boston","phone":2203043030,"zip":02020,"user":{"id":1,"email":"User@user"},"editable":true}}
+```
+
+#### SHOW /schools/:id
+
+Request:
+
+```sh
+curl "https://school-rails-api.herokuapp.com/schools/${ID}" \
+  --include \
+  --request GET \
+  --header "Authorization: Token token=${TOKEN}" \
+  --header "Content-Type: application/json" \
+```
+
+```sh
+ID=1
+TOKEN="BAhJIiU1NGNlYjRmMjBhM2NkZTZiNzk1MGNiYmZiYWMyY2U4MwY6BkVG--ddb1e16af0e05921aa56d771e4a2f816f2a1d46e" sh scripts/schools/show.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{"school":{"id":1,"name":"Cambridge College","address":"300 West St.","city":"Boston","phone":2203043030,"zip":02020,"user":{"id":1,"email":"User@user"},"editable":true}}
+```
+
+#### DELETE /schools/:id
+
+Request:
+
+```sh
+curl "https://school-rails-api.herokuapp.com/schools/${ID}" \
+  --include \
+  --request DELETE \
+  --header "Authorization: Token token=${TOKEN}" \
+  --header "Content-Type: application/json" \
+```
+
+```sh
+ID=1
+TOKEN="BAhJIiU1NGNlYjRmMjBhM2NkZTZiNzk1MGNiYmZiYWMyY2U4MwY6BkVG--ddb1e16af0e05921aa56d771e4a2f816f2a1d46e" sh scripts/schools/delete.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 204 No Content
+Content-Length: 0
 ```
 
 ## [License](LICENSE)
