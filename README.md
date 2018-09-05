@@ -1,7 +1,7 @@
 
 # School Rails Api
 
-School API back end database for School browser. \
+School API back end database for School browser.
 
 Technology used in this project include Ruby, Rails, postgreSQL, Heroku and Rake
 
@@ -9,6 +9,12 @@ This API recieves requests from cross-origin clients and responds with JSON snip
 
 # School-browser:
 https://github.com/jpetrucci49/school-browser
+
+## ERD:
+
+![alt text](./public/0830180906a.jpg)
+
+![alt text](./public/0830180912a.jpg)
 
 ### Authentication
 
