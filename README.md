@@ -7,7 +7,7 @@ Technology used in this project include Ruby, Rails, postgreSQL, Heroku and Rake
 
 This API recieves requests from cross-origin clients and responds with JSON snippets of User created school listings.
 
-# School-browser:
+# School-browser Repo:
 
 https://github.com/jpetrucci49/school-browser
 
