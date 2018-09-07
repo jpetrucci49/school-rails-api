@@ -16,6 +16,10 @@ https://github.com/jpetrucci49/school-browser
 https://school-rails-api.herokuapp.com/schools \
 https://jpetrucci49.github.io/school-browser
 
+### Unsolved Issues:
+
+Known issues would be things like the total lack of input validation, as well as no display formatting. These are most definitely issues which can be fixed in future itterations. Adding resources for teachers, and students, with a join table named class_rooms for each. School would have many of each, and all would belong_to school.
+
 ## ERD:
 
 ![ERD v1 & 2](./public/0830180906a.jpg)
